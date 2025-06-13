@@ -15,20 +15,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          
-      - name: Change working directory
-        run: cd llm-matrix
-
 
       - name: Install dependencies
         run: npm ci || npm install
-
+        working-directory: ./llm-matrix
 
       - name: Build Vite project
         run: npm run build
+        working-directory: ./llm-matrix
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: ./llm-matrix/dist
