@@ -1,0 +1,47 @@
+/* src/index.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #876dfa 0%, #1b0033 50%, #fe75f3 100%);
+    color: #f0f0f0;
+}
+
+.app {
+    max-width: none;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+
+.app {
+    max-width: none;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.dropdown {
+    margin-bottom: 30px;
+}
+
+select {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+/* Prevent dropdown clipping */
+.Select__menu-portal {
+    z-index: 9999 !important;
+}
+
