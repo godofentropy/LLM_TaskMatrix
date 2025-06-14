@@ -1,0 +1,177 @@
+[
+  {
+    "name": "StarCoder",
+    "x": 0.000,
+    "y": 0.341,
+    "scores": { "MMLU": 50.0, "HumanEval": 92.5, "BBH": 55.0, "GSM8K": 60.0, "TruthfulQA": 50.0 },
+    "categories": ["coding", "analyze data"]
+  },
+  {
+    "name": "Vicuna-13B",
+    "x": 0.435,
+    "y": 0.486,
+    "scores": { "MMLU": 60.0, "HumanEval": 67.0, "BBH": 62.0, "GSM8K": 65.0, "TruthfulQA": 70.0 },
+    "categories": []
+  },
+  {
+    "name": "XGen-7B",
+    "x": 0.509,
+    "y": 0.567,
+    "scores": { "MMLU": 63.0, "HumanEval": 69.0, "BBH": 67.0, "GSM8K": 68.0, "TruthfulQA": 72.0 },
+    "categories": []
+  },
+  {
+    "name": "Orca-2 13B",
+    "x": 0.533,
+    "y": 0.587,
+    "scores": { "MMLU": 64.0, "HumanEval": 69.0, "BBH": 67.0, "GSM8K": 70.0, "TruthfulQA": 71.0 },
+    "categories": []
+  },
+  {
+    "name": "LLaMA 3 8B",
+    "x": 0.555,
+    "y": 0.596,
+    "scores": { "MMLU": 65.0, "HumanEval": 70.0, "BBH": 68.0, "GSM8K": 70.0, "TruthfulQA": 75.0 },
+    "categories": []
+  },
+  {
+    "name": "MPT-30B",
+    "x": 0.577,
+    "y": 0.605,
+    "scores": { "MMLU": 66.0, "HumanEval": 74.0, "BBH": 69.0, "GSM8K": 70.0, "TruthfulQA": 73.0 },
+    "categories": []
+  },
+  {
+    "name": "Vicuna-33B",
+    "x": 0.619,
+    "y": 0.633,
+    "scores": { "MMLU": 68.0, "HumanEval": 70.0, "BBH": 70.0, "GSM8K": 72.0, "TruthfulQA": 75.0 },
+    "categories": []
+  },
+  {
+    "name": "DeepSeek Coder",
+    "x": 0.660,
+    "y": 0.728,
+    "scores": { "MMLU": 70.0, "HumanEval": 88.0, "BBH": 75.0, "GSM8K": 78.0, "TruthfulQA": 70.0 },
+    "categories": ["coding", "analyze data"]
+  },
+  {
+    "name": "Falcon-180B",
+    "x": 0.660,
+    "y": 0.669,
+    "scores": { "MMLU": 70.0, "HumanEval": 71.0, "BBH": 72.0, "GSM8K": 74.0, "TruthfulQA": 78.0 },
+    "categories": []
+  },
+  {
+    "name": "Mixtral 8x7B",
+    "x": 0.717,
+    "y": 0.720,
+    "scores": { "MMLU": 73.0, "HumanEval": 78.0, "BBH": 75.0, "GSM8K": 77.0, "TruthfulQA": 79.0 },
+    "categories": []
+  },
+  {
+    "name": "DeepSeek Coder 1.5",
+    "x": 0.736,
+    "y": 0.776,
+    "scores": { "MMLU": 74.0, "HumanEval": 89.5, "BBH": 78.0, "GSM8K": 81.0, "TruthfulQA": 72.0 },
+    "categories": ["coding", "analyze data"]
+  },
+  {
+    "name": "GPT-3.5",
+    "x": 0.754,
+    "y": 0.686,
+    "scores": { "MMLU": 75.0, "HumanEval": 72.0, "BBH": 70.0, "GSM8K": 78.0, "TruthfulQA": 80.0 },
+    "categories": []
+  },
+  {
+    "name": "Yi-34B",
+    "x": 0.772,
+    "y": 0.838,
+    "scores": { "MMLU": 76.0, "HumanEval": 80.0, "BBH": 82.0, "GSM8K": 85.0, "TruthfulQA": 84.0 },
+    "categories": ["coding", "analyze data"]
+  },
+  {
+    "name": "Command R+",
+    "x": 0.790,
+    "y": 0.815,
+    "scores": { "MMLU": 77.0, "HumanEval": 81.0, "BBH": 80.0, "GSM8K": 84.0, "TruthfulQA": 83.0 },
+    "categories": ["coding", "analyze data"]
+  },
+  {
+    "name": "Claude 3 Haiku",
+    "x": 0.807,
+    "y": 0.792,
+    "scores": { "MMLU": 78.0, "HumanEval": 68.0, "BBH": 80.0, "GSM8K": 81.0, "TruthfulQA": 85.0 },
+    "categories": []
+  },
+  {
+    "name": "LLaMA 3 70B",
+    "x": 0.807,
+    "y": 0.800,
+    "scores": { "MMLU": 78.0, "HumanEval": 83.0, "BBH": 80.0, "GSM8K": 82.0, "TruthfulQA": 81.0 },
+    "categories": ["coding", "analyze data"]
+  },
+  {
+    "name": "Gemini 1.5 Flash",
+    "x": 0.825,
+    "y": 0.845,
+    "scores": { "MMLU": 79.0, "HumanEval": 73.0, "BBH": 83.0, "GSM8K": 85.0, "TruthfulQA": 84.0 },
+    "categories": ["analyze data"]
+  },
+  {
+    "name": "Mixtral 8x22B",
+    "x": 0.825,
+    "y": 0.853,
+    "scores": { "MMLU": 79.0, "HumanEval": 85.0, "BBH": 83.0, "GSM8K": 86.0, "TruthfulQA": 82.0 },
+    "categories": ["coding", "analyze data"]
+  },
+  {
+    "name": "Claude 3 Sonnet",
+    "x": 0.841,
+    "y": 0.860,
+    "scores": { "MMLU": 80.0, "HumanEval": 70.0, "BBH": 85.0, "GSM8K": 85.0, "TruthfulQA": 88.0 },
+    "categories": ["writing", "evolve idea", "analyze data"]
+  },
+  {
+    "name": "GPT-4.1-mini",
+    "x": 0.841,
+    "y": 0.882,
+    "scores": { "MMLU": 80.0, "HumanEval": 83.0, "BBH": 85.0, "GSM8K": 88.0, "TruthfulQA": 85.0 },
+    "categories": ["coding", "writing", "evolve idea", "analyze data"]
+  },
+  {
+    "name": "Gemini 1.5 Pro",
+    "x": 0.883,
+    "y": 0.882,
+    "scores": { "MMLU": 82.5, "HumanEval": 77.5, "BBH": 85.5, "GSM8K": 87.5, "TruthfulQA": 86.0 },
+    "categories": ["writing", "evolve idea", "analyze data"]
+  },
+  {
+    "name": "Claude 3 Opus",
+    "x": 0.926,
+    "y": 0.914,
+    "scores": { "MMLU": 85.2, "HumanEval": 73.1, "BBH": 88.0, "GSM8K": 89.5, "TruthfulQA": 90.0 },
+    "categories": ["writing", "evolve idea", "analyze data"]
+  },
+  {
+    "name": "GPT-4",
+    "x": 0.977,
+    "y": 0.968,
+    "scores": { "MMLU": 88.5, "HumanEval": 89.2, "BBH": 90.1, "GSM8K": 95.2, "TruthfulQA": 92.3 },
+    "categories": ["coding", "writing", "evolve idea", "analyze data"]
+  },
+  {
+    "name": "GPT-4o",
+    "x": 0.985,
+    "y": 0.980,
+    "scores": { "MMLU": 89.0, "HumanEval": 90.0, "BBH": 91.0, "GSM8K": 96.0, "TruthfulQA": 93.0 },
+    "categories": ["coding", "writing", "evolve idea", "analyze data"]
+  },
+  {
+    "name": "GPT-4.5 Preview",
+    "x": 0.992,
+    "y": 0.990,
+    "scores": { "MMLU": 89.5, "HumanEval": 90.5, "BBH": 91.5, "GSM8K": 97.0, "TruthfulQA": 94.0 },
+    "categories": ["coding", "writing", "evolve idea", "analyze data"]
+  }
+]
