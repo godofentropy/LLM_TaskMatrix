@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #876dfa 0%, #1b0033 50%, #fe75f3 100%);
+    background: color(srgb red green blue);
     color: #f0f0f0;
 }
 
