@@ -7,19 +7,14 @@ const tasks = ["coding", "analyze data", "writing", "evolve idea"];
 export default function RadialTaskSelector() {
     const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
     const [filteredLLMs, setFilteredLLMs] = useState([]);
+    const [modalLLM, setModalLLM] = useState(null); // For modal
 
     const currentTask = tasks[currentTaskIndex];
 
     useEffect(() => {
-        // Filter LLMs for the selected task
         const taskLLMs = llmsData.filter(llm => llm.categories.includes(currentTask));
-
-        // Sort by MMLU
         const sorted = [...taskLLMs].sort((a, b) => (b.scores.MMLU || 0) - (a.scores.MMLU || 0));
-
-        // Assign suitability tiers
-        const total = sorted.length;
-        const tierSize = Math.ceil(total / 3);
+        const tierSize = Math.ceil(sorted.length / 3);
 
         const withSuitability = sorted.map((llm, index) => {
             if (index < tierSize) return { ...llm, suitability: "high" };
@@ -43,9 +38,9 @@ export default function RadialTaskSelector() {
     const radiusMap = { high: 80, medium: 130, low: 180 };
 
     const arcMap = {
-        high: { start: 300, end: 60 },      // Top center (wraps around)
-        medium: { start: 120, end: 240 },   // Left side
-        low: { start: 240, end: 360 },      // Right side
+        high: { start: 300, end: 60 },
+        medium: { start: 120, end: 240 },
+        low: { start: 240, end: 360 },
     };
 
     const getArcAngle = (start, end, index, total) => {
@@ -56,24 +51,20 @@ export default function RadialTaskSelector() {
 
     return (
         <div className="radial-container">
-            {/* Gradient Circles */}
             <div className="circle inner-circle"></div>
             <div className="circle middle-circle"></div>
             <div className="circle outer-circle"></div>
 
-            {/* Center Button */}
             <button className="center-button" onClick={handleClick}>
                 {currentTask}
             </button>
 
-            {/* LLM Labels per Tier */}
-            {Object.entries(tiers).map(([tier, llms]) => 
+            {Object.entries(tiers).map(([tier, llms]) =>
                 llms.map((llm, i) => {
                     const { start, end } = arcMap[tier];
                     const angle = getArcAngle(start, end, i, llms.length);
                     const radians = angle * (Math.PI / 180);
-
-                    const jitter = Math.random() * 8 - 4; // Small random offset
+                    const jitter = Math.random() * 8 - 4;
 
                     const x = (radiusMap[tier] + jitter) * Math.cos(radians);
                     const y = (radiusMap[tier] + jitter) * Math.sin(radians);
@@ -86,18 +77,30 @@ export default function RadialTaskSelector() {
                                 left: `calc(50% + ${x}px)`,
                                 top: `calc(50% + ${y}px)`
                             }}
+                            onClick={() => setModalLLM(llm)}
                         >
-                            {llm.name}
+                            {/* Empty label for cleaner layout */}
                             <div className="tooltiptext">
-                                {Object.entries(llm.scores).map(([key, value]) => (
-                                    <div key={key}>
-                                        <strong>{key}:</strong> {value}
-                                    </div>
-                                ))}
+                                <strong>{llm.name}</strong>
                             </div>
                         </div>
                     );
                 })
+            )}
+
+            {/* Modal */}
+            {modalLLM && (
+                <div className="modal-overlay" onClick={() => setModalLLM(null)}>
+                    <div className="modal-content" onClick={e => e.stopPropagation()}>
+                        <h3>{modalLLM.name}</h3>
+                        <ul style={{ listStyle: 'none', padding: 0 }}>
+                            {Object.entries(modalLLM.scores).map(([key, value]) => (
+                                <li key={key}><strong>{key}:</strong> {value}</li>
+                            ))}
+                        </ul>
+                        <button onClick={() => setModalLLM(null)} className="close-button">Close</button>
+                    </div>
+                </div>
             )}
         </div>
     );
