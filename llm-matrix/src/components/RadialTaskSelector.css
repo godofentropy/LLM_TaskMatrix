@@ -31,14 +31,45 @@
 
 .llm-label {
     position: absolute;
-    background: #444;
-    padding: 8px 12px;
-    border-radius: 12px;
-    color: #fff;
     font-size: 14px;
-    box-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
+    cursor: pointer;
 }
 
+/* Positions around the circle */
 .llm1 { top: 20px; left: 50%; transform: translateX(-50%); }
 .llm2 { bottom: 20px; left: 50%; transform: translateX(-50%); }
 .llm3 { top: 50%; right: 20px; transform: translateY(-50%); }
+
+/* Tooltip Styles */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    color: #fff;
+    background: #444;
+    padding: 6px 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
+}
+
+.tooltiptext {
+    visibility: hidden;
+    width: 140px;
+    background-color: #222;
+    color: #fff;
+    text-align: left;
+    border-radius: 8px;
+    padding: 8px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; 
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
