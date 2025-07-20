@@ -105,7 +105,7 @@ function App() {
                                         border: '1px solid #6ea8ff',
                                     },
                                 }),
-                                singleValue: (base) => ({ ...base, color: '#f0f0f0' }),
+                                singleValue: (base) => ({ ...base, color: '#000000ff' }),
                                 menu: (base) => ({
                                     ...base,
                                     backgroundColor: '#2c2c2c',
