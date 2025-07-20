@@ -7,7 +7,7 @@ const tasks = ["coding", "analyze data", "writing", "evolve idea"];
 export default function RadialTaskSelector() {
     const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
     const [filteredLLMs, setFilteredLLMs] = useState([]);
-    const [modalLLM, setModalLLM] = useState(null); // For modal
+    const [modalLLM, setModalLLM] = useState(null);
 
     const currentTask = tasks[currentTaskIndex];
 
@@ -72,14 +72,14 @@ export default function RadialTaskSelector() {
                     return (
                         <div
                             key={llm.name}
-                            className={`llm-label tooltip ${tier}`}
+                            className={`llm-marker tooltip ${tier}`}
                             style={{
                                 left: `calc(50% + ${x}px)`,
                                 top: `calc(50% + ${y}px)`
                             }}
                             onClick={() => setModalLLM(llm)}
                         >
-                            {/* Empty label for cleaner layout */}
+                            <div className="marker-dot"></div>
                             <div className="tooltiptext">
                                 <strong>{llm.name}</strong>
                             </div>

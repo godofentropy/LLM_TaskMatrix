@@ -1,3 +1,50 @@
+.llm-marker {
+    position: absolute;
+    cursor: pointer;
+}
+
+.marker-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #6ea8ff;
+    box-shadow: 0 0 6px rgba(110,168,255,0.6);
+    transition: transform 0.2s;
+}
+
+.llm-marker:hover .marker-dot {
+    transform: scale(1.3);
+}
+
+/* Tier colors (optional differentiation) */
+.llm-marker.high .marker-dot { background: #6ea8ff; }
+.llm-marker.medium .marker-dot { background: #4d88ff; }
+.llm-marker.low .marker-dot { background: #3a6cb0; }
+
+/* Tooltip */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    background-color: #222;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 6px 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 140%; 
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    white-space: nowrap;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Modal */
 .modal-overlay {
     position: fixed;
     top: 0; left: 0;
