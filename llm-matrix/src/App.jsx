@@ -1,6 +1,6 @@
 // src/App.jsx
 import { useState } from 'react';
-import QuadrantMatrix from './components/QuadrantMatrix';
+import QuadrantMatrix from './components/RadialTaskSelector';
 import llmsData from './data/llms.json';
 import './index.css';
 import Select from 'react-select';
@@ -131,7 +131,7 @@ function App() {
                 </div>
 
                 {/* Quadrant */}
-                <QuadrantMatrix llms={filteredLLMs} />
+                <RadialTaskSelector llms={filteredLLMs} />
 
                 {/* RESOURCES SECTION */}
                 <div style={{

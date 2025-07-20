@@ -1,0 +1,44 @@
+.radial-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 40px auto;
+    background: radial-gradient(circle, #2c2c2c 0%, #1a1a1a 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center-button {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #ff552e;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 12px rgba(255, 85, 46, 0.8);
+    transition: all 0.3s ease;
+}
+
+.center-button:hover {
+    transform: scale(1.05);
+}
+
+.llm-label {
+    position: absolute;
+    background: #444;
+    padding: 8px 12px;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 14px;
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
+}
+
+.llm1 { top: 20px; left: 50%; transform: translateX(-50%); }
+.llm2 { bottom: 20px; left: 50%; transform: translateX(-50%); }
+.llm3 { top: 50%; right: 20px; transform: translateY(-50%); }
