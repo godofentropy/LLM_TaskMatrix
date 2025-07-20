@@ -62,7 +62,7 @@ function App() {
                     margin: '20px',
                     gap: '10px'
                 }}>
-                    <span style={{ color: '#f0f0f0', fontSize: '16px', fontWeight: '500' }}>
+                    <span style={{ color: '#000000ff', fontSize: '16px', fontWeight: '500' }}>
                         What are you looking to do?
                     </span>
                     <div
@@ -70,7 +70,7 @@ function App() {
                             display: 'inline-block',
                             borderRadius: '12px',
                             boxShadow: '0 0 6px 3px rgba(132, 63, 255, 0.3)',
-                            padding: '4px',
+                            padding: '2px',
                             transition: 'box-shadow 0.3s ease-in-out',
                         }}
                         onMouseEnter={e => {
@@ -97,7 +97,7 @@ function App() {
                                 control: (base, state) => ({
                                     ...base,
                                     backgroundColor: '#2c2c2c',
-                                    color: '#f0f0f0',
+                                    color: '#000000ff',
                                     borderRadius: '8px',
                                     border: state.isFocused ? '1px solid #6ea8ff' : '1px solid #555',
                                     boxShadow: 'none',
@@ -109,7 +109,7 @@ function App() {
                                 menu: (base) => ({
                                     ...base,
                                     backgroundColor: '#2c2c2c',
-                                    color: '#f0f0f0',
+                                    color: '#000000ff',
                                     borderRadius: '8px',
                                     overflow: 'hidden',
                                     zIndex: 9999,
@@ -119,7 +119,7 @@ function App() {
                                     backgroundColor: state.isFocused
                                         ? '#444'
                                         : '#2c2c2c',
-                                    color: '#f0f0f0',
+                                    color: '#000000ff',
                                     cursor: 'pointer',
                                     '&:active': {
                                         backgroundColor: '#555',
