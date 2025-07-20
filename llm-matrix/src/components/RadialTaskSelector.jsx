@@ -43,9 +43,15 @@ export default function RadialTaskSelector() {
     const radiusMap = { high: 80, medium: 130, low: 180 };
 
     const arcMap = {
-        high: { start: -60, end: 60 },          // Top sector
-        medium: { start: 60, end: 180 },        // Right-bottom
-        low: { start: 180, end: 300 },          // Left-bottom
+        high: { start: 300, end: 60 },      // Top center (wraps around)
+        medium: { start: 120, end: 240 },   // Left side
+        low: { start: 240, end: 360 },      // Right side
+    };
+
+    const getArcAngle = (start, end, index, total) => {
+        const adjustedEnd = end < start ? end + 360 : end;
+        const angleSpan = adjustedEnd - start;
+        return (start + (angleSpan / total) * index) % 360;
     };
 
     return (
@@ -64,8 +70,7 @@ export default function RadialTaskSelector() {
             {Object.entries(tiers).map(([tier, llms]) => 
                 llms.map((llm, i) => {
                     const { start, end } = arcMap[tier];
-                    const angleSpan = end - start;
-                    const angle = start + (angleSpan / llms.length) * i;
+                    const angle = getArcAngle(start, end, i, llms.length);
                     const radians = angle * (Math.PI / 180);
 
                     const jitter = Math.random() * 8 - 4; // Small random offset
