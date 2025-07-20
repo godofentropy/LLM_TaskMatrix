@@ -65,7 +65,6 @@
 
 .llm-label {
     position: absolute;
-    font-size: 13px;
     background: #444;
     padding: 6px 10px;
     border-radius: 8px;
@@ -73,6 +72,11 @@
     white-space: nowrap;
     box-shadow: 0 0 6px rgba(255,255,255,0.2);
 }
+
+/* Dynamic font sizes per tier */
+.llm-label.high { font-size: 13px; }
+.llm-label.medium { font-size: 12px; }
+.llm-label.low { font-size: 11px; }
 
 /* Tooltip */
 .tooltip .tooltiptext {

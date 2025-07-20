@@ -17,7 +17,7 @@ export default function RadialTaskSelector() {
         // Sort by MMLU
         const sorted = [...taskLLMs].sort((a, b) => (b.scores.MMLU || 0) - (a.scores.MMLU || 0));
 
-        // Assign suitability tiers: high, medium, low
+        // Assign suitability tiers
         const total = sorted.length;
         const tierSize = Math.ceil(total / 3);
 
@@ -42,6 +42,12 @@ export default function RadialTaskSelector() {
 
     const radiusMap = { high: 80, medium: 130, low: 180 };
 
+    const arcMap = {
+        high: { start: -60, end: 60 },          // Top sector
+        medium: { start: 60, end: 180 },        // Right-bottom
+        low: { start: 180, end: 300 },          // Left-bottom
+    };
+
     return (
         <div className="radial-container">
             {/* Gradient Circles */}
@@ -57,15 +63,20 @@ export default function RadialTaskSelector() {
             {/* LLM Labels per Tier */}
             {Object.entries(tiers).map(([tier, llms]) => 
                 llms.map((llm, i) => {
-                    const angle = (360 / llms.length) * i;
+                    const { start, end } = arcMap[tier];
+                    const angleSpan = end - start;
+                    const angle = start + (angleSpan / llms.length) * i;
                     const radians = angle * (Math.PI / 180);
-                    const x = radiusMap[tier] * Math.cos(radians);
-                    const y = radiusMap[tier] * Math.sin(radians);
+
+                    const jitter = Math.random() * 8 - 4; // Small random offset
+
+                    const x = (radiusMap[tier] + jitter) * Math.cos(radians);
+                    const y = (radiusMap[tier] + jitter) * Math.sin(radians);
 
                     return (
                         <div
                             key={llm.name}
-                            className="llm-label tooltip"
+                            className={`llm-label tooltip ${tier}`}
                             style={{
                                 left: `calc(50% + ${x}px)`,
                                 top: `calc(50% + ${y}px)`
