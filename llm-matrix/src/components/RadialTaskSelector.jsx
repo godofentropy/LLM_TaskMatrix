@@ -51,20 +51,23 @@ export default function RadialTaskSelector() {
 
     return (
         <div className="radial-container">
-            <div className="circle inner-circle"></div>
-            <div className="circle middle-circle"></div>
-            <div className="circle outer-circle"></div>
+            {/* Concentric Rings explicitly drawn */}
+            <div className="dial-ring high-ring"></div>
+            <div className="dial-ring medium-ring"></div>
+            <div className="dial-ring low-ring"></div>
 
+            {/* Center Button */}
             <button className="center-button" onClick={handleClick}>
                 {currentTask}
             </button>
 
+            {/* Dial markers */}
             {Object.entries(tiers).map(([tier, llms]) =>
                 llms.map((llm, i) => {
                     const { start, end } = arcMap[tier];
                     const angle = getArcAngle(start, end, i, llms.length);
                     const radians = angle * (Math.PI / 180);
-                    const jitter = Math.random() * 8 - 4;
+                    const jitter = Math.random() * 6 - 3;
 
                     const x = (radiusMap[tier] + jitter) * Math.cos(radians);
                     const y = (radiusMap[tier] + jitter) * Math.sin(radians);

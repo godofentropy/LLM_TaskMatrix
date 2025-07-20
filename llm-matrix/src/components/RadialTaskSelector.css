@@ -1,3 +1,65 @@
+.radial-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 40px auto;
+    background: #0f0f0f;
+    border-radius: 50%;
+    box-shadow: 0 0 30px rgba(132, 63, 255, 0.3);
+    overflow: hidden;
+}
+
+/* Concentric rings */
+.dial-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(110, 168, 255, 0.2);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.high-ring {
+    width: 160px;
+    height: 160px;
+    border: 2px solid rgba(110, 168, 255, 0.4);
+}
+
+.medium-ring {
+    width: 260px;
+    height: 260px;
+    border: 1px solid rgba(110, 168, 255, 0.3);
+}
+
+.low-ring {
+    width: 340px;
+    height: 340px;
+    border: 1px solid rgba(110, 168, 255, 0.2);
+}
+
+.center-button {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #ff552e;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(255, 85, 46, 0.8);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s;
+}
+
+.center-button:hover {
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
+/* Marker Dots */
 .llm-marker {
     position: absolute;
     cursor: pointer;
@@ -16,7 +78,6 @@
     transform: scale(1.3);
 }
 
-/* Tier colors (optional differentiation) */
 .llm-marker.high .marker-dot { background: #6ea8ff; }
 .llm-marker.medium .marker-dot { background: #4d88ff; }
 .llm-marker.low .marker-dot { background: #3a6cb0; }
