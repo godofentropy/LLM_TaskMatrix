@@ -11,15 +11,16 @@ export default function RadialTaskSelector() {
     const currentTask = tasks[currentTaskIndex];
 
     useEffect(() => {
-        // Filter LLMs for current task
+        // Filter LLMs for the selected task
         const taskLLMs = llmsData.filter(llm => llm.categories.includes(currentTask));
 
-        // Sort by MMLU or fallback to 0
+        // Sort by MMLU
         const sorted = [...taskLLMs].sort((a, b) => (b.scores.MMLU || 0) - (a.scores.MMLU || 0));
 
-        // Assign suitability tiers
+        // Assign suitability tiers: high, medium, low
         const total = sorted.length;
         const tierSize = Math.ceil(total / 3);
+
         const withSuitability = sorted.map((llm, index) => {
             if (index < tierSize) return { ...llm, suitability: "high" };
             if (index < tierSize * 2) return { ...llm, suitability: "medium" };
@@ -33,15 +34,13 @@ export default function RadialTaskSelector() {
         setCurrentTaskIndex((currentTaskIndex + 1) % tasks.length);
     };
 
-    const getPosition = (tier, i, total) => {
-        const radiusMap = { high: 80, medium: 130, low: 180 };
-        const angle = (360 / total) * i;
-        const radians = angle * (Math.PI / 180);
-        return {
-            x: radiusMap[tier] * Math.cos(radians),
-            y: radiusMap[tier] * Math.sin(radians),
-        };
+    const tiers = {
+        high: filteredLLMs.filter(llm => llm.suitability === "high"),
+        medium: filteredLLMs.filter(llm => llm.suitability === "medium"),
+        low: filteredLLMs.filter(llm => llm.suitability === "low"),
     };
+
+    const radiusMap = { high: 80, medium: 130, low: 180 };
 
     return (
         <div className="radial-container">
@@ -55,30 +54,35 @@ export default function RadialTaskSelector() {
                 {currentTask}
             </button>
 
-            {/* LLM Labels */}
-            {filteredLLMs.map((llm, index) => {
-                const { x, y } = getPosition(llm.suitability, index, filteredLLMs.length);
+            {/* LLM Labels per Tier */}
+            {Object.entries(tiers).map(([tier, llms]) => 
+                llms.map((llm, i) => {
+                    const angle = (360 / llms.length) * i;
+                    const radians = angle * (Math.PI / 180);
+                    const x = radiusMap[tier] * Math.cos(radians);
+                    const y = radiusMap[tier] * Math.sin(radians);
 
-                return (
-                    <div
-                        key={llm.name}
-                        className="llm-label tooltip"
-                        style={{
-                            left: `calc(50% + ${x}px)`,
-                            top: `calc(50% + ${y}px)`
-                        }}
-                    >
-                        {llm.name}
-                        <div className="tooltiptext">
-                            {Object.entries(llm.scores).map(([key, value]) => (
-                                <div key={key}>
-                                    <strong>{key}:</strong> {value}
-                                </div>
-                            ))}
+                    return (
+                        <div
+                            key={llm.name}
+                            className="llm-label tooltip"
+                            style={{
+                                left: `calc(50% + ${x}px)`,
+                                top: `calc(50% + ${y}px)`
+                            }}
+                        >
+                            {llm.name}
+                            <div className="tooltiptext">
+                                {Object.entries(llm.scores).map(([key, value]) => (
+                                    <div key={key}>
+                                        <strong>{key}:</strong> {value}
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                );
-            })}
+                    );
+                })
+            )}
         </div>
     );
 }
