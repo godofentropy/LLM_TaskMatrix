@@ -138,7 +138,7 @@ function App() {
                     maxWidth: '800px',
                     margin: '40px auto',
                     padding: '0 20px',
-                    color: '#f0f0f0',
+                    color: '#000000ff',
                     fontSize: '16px',
                     textAlign: 'left',
                     borderTop: '1px solid #444',
@@ -147,7 +147,7 @@ function App() {
                     <h2 style={{
                         fontSize: '20px',
                         marginBottom: '16px',
-                        color: '#f0f0f0',
+                        color: '#000000ff',
                         textAlign: 'center'
                     }}>
                         Learning Resources
@@ -155,7 +155,7 @@ function App() {
                     <p style={{
                         marginBottom: '20px',
                         fontSize: '15px',
-                        color: '#cccccc',
+                        color: '#000000ff',
                         textAlign: 'center'
                     }}>
                         Use this tool to explore Large Language Models (LLMs) by flexibility, precision, and power.
@@ -194,7 +194,7 @@ function App() {
                                 style={{
                                     display: 'flex',
                                     alignItems: 'center',
-                                    background: '#2c2c2c',
+                                    background: '#000000ff',
                                     padding: '12px 16px',
                                     borderRadius: '8px',
                                     border: '1px solid #333',
