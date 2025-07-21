@@ -48,7 +48,7 @@ export default function ResourcesPanel({ task }) {
     return (
         <div className="resources-container">
             <h2 className="resources-title">
-                {loading ? "Loading Resources..." : `Explore & Learn: Recommended Resources- ${task}`}
+                {loading ? "Loading Resources..." : `Explore & Learn: Recommended Resources-${task}`}
             </h2>
 
             {(!loading && arxivPapers.length === 0 && models.length === 0) && (
@@ -57,7 +57,7 @@ export default function ResourcesPanel({ task }) {
 
             {arxivPapers.length > 0 && (
                 <div className="resource-group">
-                    <h3 className="group-title">📄 Latest Papers (ArXiv)</h3>
+                    <h3 className="group-title"> Latest Papers (ArXiv)</h3>
                     <ul>
                         {arxivPapers.map(paper => (
                             <li key={paper.link}>
@@ -72,7 +72,7 @@ export default function ResourcesPanel({ task }) {
 
             {models.length > 0 && (
                 <div className="resource-group">
-                    <h3 className="group-title">🤖 HuggingFace Models</h3>
+                    <h3 className="group-title"> HuggingFace Models</h3>
                     <ul>
                         {models.map(model => (
                             <li key={model.link}>
