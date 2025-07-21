@@ -4,12 +4,18 @@ import HelpOverlay from './components/HelpOverlay';
 import ResourcesPanel from './components/ResourcesPanel';
 import './index.css';
 
+const tasks = ["Coding", "Analyze Data", "Writing", "Evolve an Idea"];
+
 function App() {
-    const [currentTask, setCurrentTask] = useState('coding'); // Default task
+    const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
+    const currentTask = tasks[currentTaskIndex];
+
+    const handleNextTask = () => {
+        setCurrentTaskIndex((prev) => (prev + 1) % tasks.length);
+    };
 
     return (
         <>
-            {/* HEADER */}
             <header style={{
                 width: '100vw',
                 backgroundColor: '#13294b',
@@ -41,7 +47,7 @@ function App() {
             <HelpOverlay />
 
             <div className="app">
-                <RadialTaskSelector onTaskChange={setCurrentTask} />
+                <RadialTaskSelector task={currentTask} onNextTask={handleNextTask} />
                 <ResourcesPanel task={currentTask} />
             </div>
         </>

@@ -2,17 +2,12 @@ import { useState, useEffect } from 'react';
 import llmsData from '../data/llms.json';
 import './RadialTaskSelector.css';
 
-const tasks = ["Coding", "Analyze Data", "Writing", "Evolve an Idea"];
-
-export default function RadialTaskSelector({ onTaskChange }) {
-    const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
+export default function RadialTaskSelector({ task, onNextTask }) {
     const [filteredLLMs, setFilteredLLMs] = useState([]);
     const [selectedLLM, setSelectedLLM] = useState(null);
 
-    const currentTask = tasks[currentTaskIndex];
-
     useEffect(() => {
-        const taskLLMs = llmsData.filter(llm => llm.categories.includes(currentTask));
+        const taskLLMs = llmsData.filter(llm => llm.categories.includes(task));
         const sorted = [...taskLLMs].sort((a, b) => (b.scores.MMLU || 0) - (a.scores.MMLU || 0));
         const tierSize = Math.ceil(sorted.length / 3);
 
@@ -23,19 +18,7 @@ export default function RadialTaskSelector({ onTaskChange }) {
         });
 
         setFilteredLLMs(withSuitability);
-
-        // Notify parent of task change
-        if (onTaskChange) {
-            onTaskChange(currentTask);
-        }
-
-    }, [currentTask, onTaskChange]);
-
-    const handleClick = () => {
-        const nextIndex = (currentTaskIndex + 1) % tasks.length;
-        setCurrentTaskIndex(nextIndex);
-        setSelectedLLM(null);
-    };
+    }, [task]);
 
     const tiers = {
         high: filteredLLMs.filter(llm => llm.suitability === "high"),
@@ -44,7 +27,6 @@ export default function RadialTaskSelector({ onTaskChange }) {
     };
 
     const radiusMap = { high: 80, medium: 130, low: 180 };
-
     const arcMap = {
         high: { start: 300, end: 60 },
         medium: { start: 120, end: 240 },
@@ -63,8 +45,8 @@ export default function RadialTaskSelector({ onTaskChange }) {
             <div className="dial-ring medium-ring"></div>
             <div className="dial-ring low-ring"></div>
 
-            <button className="center-button" onClick={handleClick}>
-                {currentTask}
+            <button className="center-button" onClick={onNextTask}>
+                {task}
             </button>
 
             {Object.entries(tiers).map(([tier, llms]) =>
@@ -103,17 +85,11 @@ export default function RadialTaskSelector({ onTaskChange }) {
                         <button 
                             className="close-btn"
                             onClick={() => setSelectedLLM(null)}
-                            aria-label="Close Panel"
-                        >
-                            ✕
-                        </button>
+                        >✕</button>
                     </div>
-
                     <ul style={{ listStyle: 'none', padding: 0 }}>
                         {Object.entries(selectedLLM.scores).map(([key, value]) => (
-                            <li key={key}>
-                                <strong>{key}:</strong> {value}
-                            </li>
+                            <li key={key}><strong>{key}:</strong> {value}</li>
                         ))}
                     </ul>
                 </div>

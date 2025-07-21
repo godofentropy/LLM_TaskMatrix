@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import './LearningResources.css'; // Import the shared styles
+import './LearningResources.css';
 
 export default function ResourcesPanel({ task }) {
     const [arxivPapers, setArxivPapers] = useState([]);
@@ -42,13 +42,12 @@ export default function ResourcesPanel({ task }) {
         Promise.all([fetchArxiv(), fetchHuggingFace()])
             .then(() => setLoading(false))
             .catch(() => setLoading(false));
-
     }, [task]);
 
     return (
         <div className="resources-container">
             <h2 className="resources-title">
-                {loading ? "Loading Resources..." : `Explore & Learn: Recommended Resources- ${task}`}
+                {loading ? "Loading Resources..." : `Explore & Learn: Recommended Resources - ${task}`}
             </h2>
 
             {(!loading && arxivPapers.length === 0 && models.length === 0) && (
