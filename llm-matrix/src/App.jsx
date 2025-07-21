@@ -1,26 +1,7 @@
-// src/App.jsx
-import { useState } from 'react';
 import RadialTaskSelector from './components/RadialTaskSelector';
-import llmsData from './data/llms.json';
 import './index.css';
-import Select from 'react-select';
 
 function App() {
-    const [selectedCategory, setSelectedCategory] = useState('');
-
-    // All unique categories
-    const allCategories = Array.from(new Set(llmsData.flatMap(llm => llm.categories)));
-
-    // Filter LLMs
-    const filteredLLMs = selectedCategory
-        ? llmsData.filter(llm => llm.categories.includes(selectedCategory))
-        : llmsData;
-
-    const categoryOptions = [
-        { value: '', label: 'All' },
-        ...allCategories.map(category => ({ value: category, label: category })),
-    ];
-
     return (
         <>
             {/* HEADER */}
@@ -54,84 +35,31 @@ function App() {
 
             {/* APP CONTENT */}
             <div className="app">
-                {/* Dropdown */}
-                <div className="dropdown" style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    margin: '20px',
-                    gap: '10px'
+
+                {/* How to Use Section */}
+                <div style={{
+                    maxWidth: '600px',
+                    margin: '30px auto',
+                    padding: '20px',
+                    background: '#f9f9f9',
+                    borderRadius: '12px',
+                    boxShadow: '0 0 12px rgba(0,0,0,0.05)',
+                    color: '#222',
+                    textAlign: 'center',
+                    fontSize: '15px'
                 }}>
-                    <span style={{ color: '#000000ff', fontSize: '16px', fontWeight: '500' }}>
-                        What are you looking to do?
-                    </span>
-                    <div
-                        style={{
-                            display: 'inline-block',
-                            borderRadius: '12px',
-                            boxShadow: '0 0 6px 3px rgba(132, 63, 255, 0.3)',
-                            padding: '2px',
-                            transition: 'box-shadow 0.3s ease-in-out',
-                        }}
-                        onMouseEnter={e => {
-                            e.currentTarget.style.boxShadow = '0 0 18px 8px rgba(138, 43, 226, 0.8)';
-                        }}
-                        onMouseLeave={e => {
-                            e.currentTarget.style.boxShadow = '0 0 12px 4px rgba(138, 43, 226, 0.6)';
-                        }}
-                    >
-                        <Select
-                            classNamePrefix="Select"
-                            menuPortalTarget={document.body}
-                            menuPosition="fixed"
-                            value={categoryOptions.find(option => option.value === selectedCategory)}
-                            onChange={(selectedOption) => setSelectedCategory(selectedOption.value)}
-                            options={categoryOptions}
-                            styles={{
-                                container: (base) => ({
-                                    ...base,
-                                    minWidth: '250px',
-                                    maxWidth: '300px',
-                                    zIndex: 1000, // optional extra
-                                }),
-                                control: (base, state) => ({
-                                    ...base,
-                                    backgroundColor: '#2c2c2c',
-                                    color: '#000000ff',
-                                    borderRadius: '8px',
-                                    border: state.isFocused ? '1px solid #6ea8ff' : '1px solid #555',
-                                    boxShadow: 'none',
-                                    '&:hover': {
-                                        border: '1px solid #6ea8ff',
-                                    },
-                                }),
-                                singleValue: (base) => ({ ...base, color: '#000000ff' }),
-                                menu: (base) => ({
-                                    ...base,
-                                    backgroundColor: '#2c2c2c',
-                                    color: '#000000ff',
-                                    borderRadius: '8px',
-                                    overflow: 'hidden',
-                                    zIndex: 9999,
-                                }),
-                                option: (base, state) => ({
-                                    ...base,
-                                    backgroundColor: state.isFocused
-                                        ? '#444'
-                                        : '#2c2c2c',
-                                    color: '#000000ff',
-                                    cursor: 'pointer',
-                                    '&:active': {
-                                        backgroundColor: '#555',
-                                    },
-                                }),
-                            }}
-                        />
-                    </div>
+                    <h2 style={{ marginBottom: '12px', color: '#ff552e' }}>📘 How to Use the AI Task Matrix</h2>
+                    <p>This tool helps you find the best AI model for your task.</p>
+                    <ol style={{ textAlign: 'left', margin: '10px auto', maxWidth: '400px' }}>
+                        <li><strong>Select your task</strong> by clicking the orange center button.</li>
+                        <li><strong>Read the dial:</strong> Inner dots = better for the task. Outer dots = generalists.</li>
+                        <li><strong>Hover</strong> on a dot to see the model name.</li>
+                        <li><strong>Click</strong> a dot to view detailed performance in the right panel.</li>
+                    </ol>
                 </div>
 
-                {/* Quadrant */}
-                <RadialTaskSelector llms={filteredLLMs} />
+                {/* Radial Dial */}
+                <RadialTaskSelector />
 
                 {/* RESOURCES SECTION */}
                 <div style={{
