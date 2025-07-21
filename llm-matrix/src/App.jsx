@@ -1,5 +1,6 @@
 import RadialTaskSelector from './components/RadialTaskSelector';
 import HelpOverlay from './components/HelpOverlay';
+import ResourcesPanel from './components/ResourcesPanel';
 import './index.css';
 
 function App() {
@@ -42,6 +43,8 @@ function App() {
 
                 {/* Radial Dial */}
                 <RadialTaskSelector />
+                <ResourcesPanel task={currentTask} />
+
 
                 {/* RESOURCES SECTION */}
                 <div style={{
