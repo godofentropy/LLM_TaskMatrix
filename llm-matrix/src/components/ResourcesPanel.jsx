@@ -48,7 +48,7 @@ export default function ResourcesPanel({ task }) {
     return (
         <div className="resources-container">
             <h2 className="resources-title">
-                {loading ? "Loading Resources..." : `Learning Resources: ${task}`}
+                {loading ? "Loading Resources..." : `Explore & Learn: Recommended Resources- ${task}`}
             </h2>
 
             {(!loading && arxivPapers.length === 0 && models.length === 0) && (
