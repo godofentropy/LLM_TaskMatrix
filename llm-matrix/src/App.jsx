@@ -1,4 +1,5 @@
 import RadialTaskSelector from './components/RadialTaskSelector';
+import HelpOverlay from './components/HelpOverlay';
 import './index.css';
 
 function App() {
@@ -32,6 +33,9 @@ function App() {
                     AI Task Matrix
                 </div>
             </header>
+
+            {/* GLOBAL HELP OVERLAY */}
+            <HelpOverlay />
 
             {/* APP CONTENT */}
             <div className="app">
@@ -68,7 +72,6 @@ function App() {
                         Below are resources to help you use and integrate these models into your projects.
                     </p>
 
-                    {/* RESOURCE CARDS */}
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                         {[{
                             icon: '💬',
