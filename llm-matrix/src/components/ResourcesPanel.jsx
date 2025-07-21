@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import './LearningResources.css'; // Import the shared styles
 
 export default function ResourcesPanel({ task }) {
     const [arxivPapers, setArxivPapers] = useState([]);
@@ -29,7 +30,6 @@ export default function ResourcesPanel({ task }) {
 
         const fetchHuggingFace = async () => {
             const url = `https://huggingface.co/api/models?search=${encodeURIComponent(task)}`;
-
             const response = await fetch(url);
             const modelsData = await response.json();
 
@@ -46,75 +46,44 @@ export default function ResourcesPanel({ task }) {
     }, [task]);
 
     return (
-        <div style={{
-            maxWidth: '800px',
-            margin: '40px auto',
-            padding: '0 20px',
-            color: '#000000ff',
-            fontSize: '16px',
-            textAlign: 'left',
-            borderTop: '1px solid #444',
-            paddingTop: '20px'
-        }}>
-            <h2 style={{
-                fontSize: '20px',
-                marginBottom: '16px',
-                color: '#000000ff',
-                textAlign: 'center'
-            }}>
+        <div className="resources-container">
+            <h2 className="resources-title">
                 {loading ? "Loading Resources..." : `Learning Resources: ${task}`}
             </h2>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                {/* Arxiv Papers */}
-                {arxivPapers.length > 0 && (
-                    <>
-                        <h3>📄 Latest Papers (ArXiv)</h3>
+            {(!loading && arxivPapers.length === 0 && models.length === 0) && (
+                <p className="no-resources">No resources found for "{task}". Try another task.</p>
+            )}
+
+            {arxivPapers.length > 0 && (
+                <div className="resource-group">
+                    <h3 className="group-title">📄 Latest Papers (ArXiv)</h3>
+                    <ul>
                         {arxivPapers.map(paper => (
-                            <div key={paper.link}
-                                style={{
-                                    background: '#000000ff',
-                                    padding: '12px 16px',
-                                    borderRadius: '8px',
-                                    border: '1px solid #333',
-                                    cursor: 'pointer',
-                                    transition: 'transform 0.2s, box-shadow 0.2s'
-                                }}
-                                onClick={() => window.open(paper.link, '_blank')}
-                            >
-                                <div style={{ color: '#6ea8ff', fontWeight: 'bold' }}>{paper.title}</div>
-                            </div>
+                            <li key={paper.link}>
+                                <a href={paper.link} target="_blank" rel="noreferrer">
+                                    {paper.title}
+                                </a>
+                            </li>
                         ))}
-                    </>
-                )}
+                    </ul>
+                </div>
+            )}
 
-                {/* HuggingFace Models */}
-                {models.length > 0 && (
-                    <>
-                        <h3>🤖 HuggingFace Models</h3>
+            {models.length > 0 && (
+                <div className="resource-group">
+                    <h3 className="group-title">🤖 HuggingFace Models</h3>
+                    <ul>
                         {models.map(model => (
-                            <div key={model.link}
-                                style={{
-                                    background: '#000000ff',
-                                    padding: '12px 16px',
-                                    borderRadius: '8px',
-                                    border: '1px solid #333',
-                                    cursor: 'pointer',
-                                    transition: 'transform 0.2s, box-shadow 0.2s'
-                                }}
-                                onClick={() => window.open(model.link, '_blank')}
-                            >
-                                <div style={{ color: '#6ea8ff', fontWeight: 'bold' }}>{model.name}</div>
-                            </div>
+                            <li key={model.link}>
+                                <a href={model.link} target="_blank" rel="noreferrer">
+                                    {model.name}
+                                </a>
+                            </li>
                         ))}
-                    </>
-                )}
-
-                {/* Fallback if no resources found */}
-                {(!loading && arxivPapers.length === 0 && models.length === 0) && (
-                    <p>No resources found for "{task}". Try another task.</p>
-                )}
-            </div>
+                    </ul>
+                </div>
+            )}
         </div>
     );
 }
