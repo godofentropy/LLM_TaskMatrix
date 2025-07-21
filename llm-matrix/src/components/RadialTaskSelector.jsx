@@ -4,7 +4,7 @@ import './RadialTaskSelector.css';
 
 const tasks = ["Coding", "Analyze Data", "Writing", "Evolve an Idea"];
 
-export default function RadialTaskSelector({ onTaskChange }) {
+export default function RadialTaskSelector() {
     const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
     const [filteredLLMs, setFilteredLLMs] = useState([]);
     const [selectedLLM, setSelectedLLM] = useState(null);
@@ -23,17 +23,10 @@ export default function RadialTaskSelector({ onTaskChange }) {
         });
 
         setFilteredLLMs(withSuitability);
-
-        // Notify parent of task change
-        if (onTaskChange) {
-            onTaskChange(currentTask);
-        }
-
-    }, [currentTask, onTaskChange]);
+    }, [currentTask]);
 
     const handleClick = () => {
-        const nextIndex = (currentTaskIndex + 1) % tasks.length;
-        setCurrentTaskIndex(nextIndex);
+        setCurrentTaskIndex((currentTaskIndex + 1) % tasks.length);
         setSelectedLLM(null);
     };
 
@@ -59,6 +52,7 @@ export default function RadialTaskSelector({ onTaskChange }) {
 
     return (
         <div className="radial-container">
+            {/* Rings */}
             <div className="dial-ring high-ring"></div>
             <div className="dial-ring medium-ring"></div>
             <div className="dial-ring low-ring"></div>
@@ -67,6 +61,7 @@ export default function RadialTaskSelector({ onTaskChange }) {
                 {currentTask}
             </button>
 
+            {/* LLM Dots */}
             {Object.entries(tiers).map(([tier, llms]) =>
                 llms.map((llm, i) => {
                     const { start, end } = arcMap[tier];
@@ -96,6 +91,7 @@ export default function RadialTaskSelector({ onTaskChange }) {
                 })
             )}
 
+            {/* Side Panel */}
             {selectedLLM && (
                 <div className="side-panel">
                     <div className="side-panel-header">
