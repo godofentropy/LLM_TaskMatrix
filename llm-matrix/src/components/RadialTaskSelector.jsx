@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import llmsData from '../data/llms.json';
 import './RadialTaskSelector.css';
 
-const tasks = ["coding", "analyze data", "writing", "evolve idea"];
+const tasks = ["Coding", "Analyze Data", "Writing", "Evolve an Idea"];
 
 export default function RadialTaskSelector({ onTaskChange }) {
     const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
