@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import llmsData from '../data/llms.json';
 import './RadialTaskSelector.css';
 
-export default function RadialTaskSelector({ onTaskChange }) {
-    const tasks = ["coding", "analyze data", "writing", "evolve idea"];
+const tasks = ["coding", "analyze data", "writing", "evolve idea"];
+
+export default function RadialTaskSelector() {
     const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
     const [filteredLLMs, setFilteredLLMs] = useState([]);
     const [selectedLLM, setSelectedLLM] = useState(null);
@@ -25,9 +26,7 @@ export default function RadialTaskSelector({ onTaskChange }) {
     }, [currentTask]);
 
     const handleClick = () => {
-        const nextIndex = (currentTaskIndex + 1) % tasks.length;
-        setCurrentTaskIndex(nextIndex);
-        onTaskChange(tasks[nextIndex]); // Notify App
+        setCurrentTaskIndex((currentTaskIndex + 1) % tasks.length);
         setSelectedLLM(null);
     };
 
@@ -38,6 +37,7 @@ export default function RadialTaskSelector({ onTaskChange }) {
     };
 
     const radiusMap = { high: 80, medium: 130, low: 180 };
+
     const arcMap = {
         high: { start: 300, end: 60 },
         medium: { start: 120, end: 240 },
@@ -52,6 +52,7 @@ export default function RadialTaskSelector({ onTaskChange }) {
 
     return (
         <div className="radial-container">
+            {/* Rings */}
             <div className="dial-ring high-ring"></div>
             <div className="dial-ring medium-ring"></div>
             <div className="dial-ring low-ring"></div>
@@ -60,6 +61,7 @@ export default function RadialTaskSelector({ onTaskChange }) {
                 {currentTask}
             </button>
 
+            {/* LLM Dots */}
             {Object.entries(tiers).map(([tier, llms]) =>
                 llms.map((llm, i) => {
                     const { start, end } = arcMap[tier];
@@ -89,12 +91,25 @@ export default function RadialTaskSelector({ onTaskChange }) {
                 })
             )}
 
+            {/* Side Panel */}
             {selectedLLM && (
                 <div className="side-panel">
-                    <h3>{selectedLLM.name}</h3>
+                    <div className="side-panel-header">
+                        <h3>{selectedLLM.name}</h3>
+                        <button 
+                            className="close-btn"
+                            onClick={() => setSelectedLLM(null)}
+                            aria-label="Close Panel"
+                        >
+                            ✕
+                        </button>
+                    </div>
+
                     <ul style={{ listStyle: 'none', padding: 0 }}>
                         {Object.entries(selectedLLM.scores).map(([key, value]) => (
-                            <li key={key}><strong>{key}:</strong> {value}</li>
+                            <li key={key}>
+                                <strong>{key}:</strong> {value}
+                            </li>
                         ))}
                     </ul>
                 </div>
