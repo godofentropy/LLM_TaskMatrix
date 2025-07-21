@@ -36,28 +36,6 @@ function App() {
             {/* APP CONTENT */}
             <div className="app">
 
-                {/* How to Use Section */}
-                <div style={{
-                    maxWidth: '600px',
-                    margin: '30px auto',
-                    padding: '20px',
-                    background: '#f9f9f9',
-                    borderRadius: '12px',
-                    boxShadow: '0 0 12px rgba(0,0,0,0.05)',
-                    color: '#222',
-                    textAlign: 'center',
-                    fontSize: '15px'
-                }}>
-                    <h2 style={{ marginBottom: '12px', color: '#ff552e' }}>📘 How to Use the AI Task Matrix</h2>
-                    <p>This tool helps you find the best AI model for your task.</p>
-                    <ol style={{ textAlign: 'left', margin: '10px auto', maxWidth: '400px' }}>
-                        <li><strong>Select your task</strong> by clicking the orange center button.</li>
-                        <li><strong>Read the dial:</strong> Inner dots = better for the task. Outer dots = generalists.</li>
-                        <li><strong>Hover</strong> on a dot to see the model name.</li>
-                        <li><strong>Click</strong> a dot to view detailed performance in the right panel.</li>
-                    </ol>
-                </div>
-
                 {/* Radial Dial */}
                 <RadialTaskSelector />
 
@@ -92,32 +70,30 @@ function App() {
 
                     {/* RESOURCE CARDS */}
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                        {[
-                            {
-                                icon: '💬',
-                                title: 'UIUC Chat Platform',
-                                subtitle: 'Explore UIUC-hosted LLMs',
-                                url: 'https://uiuc.chat'
-                            },
-                            {
-                                icon: '📚',
-                                title: 'HuggingFace Model Hub',
-                                subtitle: 'Find and compare open LLM models',
-                                url: 'https://huggingface.co/models'
-                            },
-                            {
-                                icon: '⚙️',
-                                title: 'OpenAI API Docs',
-                                subtitle: 'Integrate GPT models via API',
-                                url: 'https://openai.com/api'
-                            },
-                            {
-                                icon: '📄',
-                                title: 'Anthropic API Docs',
-                                subtitle: 'Integrate Claude models via API',
-                                url: 'https://platform.anthropic.com/docs'
-                            },
-                        ].map(resource => (
+                        {[{
+                            icon: '💬',
+                            title: 'UIUC Chat Platform',
+                            subtitle: 'Explore UIUC-hosted LLMs',
+                            url: 'https://uiuc.chat'
+                        },
+                        {
+                            icon: '📚',
+                            title: 'HuggingFace Model Hub',
+                            subtitle: 'Find and compare open LLM models',
+                            url: 'https://huggingface.co/models'
+                        },
+                        {
+                            icon: '⚙️',
+                            title: 'OpenAI API Docs',
+                            subtitle: 'Integrate GPT models via API',
+                            url: 'https://openai.com/api'
+                        },
+                        {
+                            icon: '📄',
+                            title: 'Anthropic API Docs',
+                            subtitle: 'Integrate Claude models via API',
+                            url: 'https://platform.anthropic.com/docs'
+                        }].map(resource => (
                             <div key={resource.title}
                                 style={{
                                     display: 'flex',
