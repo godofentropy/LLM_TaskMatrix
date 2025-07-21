@@ -7,7 +7,7 @@ const tasks = ["coding", "analyze data", "writing", "evolve idea"];
 export default function RadialTaskSelector() {
     const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
     const [filteredLLMs, setFilteredLLMs] = useState([]);
-    const [modalLLM, setModalLLM] = useState(null);
+    const [selectedLLM, setSelectedLLM] = useState(null); // Side panel selection
 
     const currentTask = tasks[currentTaskIndex];
 
@@ -27,6 +27,7 @@ export default function RadialTaskSelector() {
 
     const handleClick = () => {
         setCurrentTaskIndex((currentTaskIndex + 1) % tasks.length);
+        setSelectedLLM(null); // Reset side panel when task changes
     };
 
     const tiers = {
@@ -51,17 +52,16 @@ export default function RadialTaskSelector() {
 
     return (
         <div className="radial-container">
-            {/* Concentric Rings explicitly drawn */}
+            {/* Concentric Rings */}
             <div className="dial-ring high-ring"></div>
             <div className="dial-ring medium-ring"></div>
             <div className="dial-ring low-ring"></div>
 
-            {/* Center Button */}
             <button className="center-button" onClick={handleClick}>
                 {currentTask}
             </button>
 
-            {/* Dial markers */}
+            {/* LLM Markers */}
             {Object.entries(tiers).map(([tier, llms]) =>
                 llms.map((llm, i) => {
                     const { start, end } = arcMap[tier];
@@ -80,7 +80,7 @@ export default function RadialTaskSelector() {
                                 left: `calc(50% + ${x}px)`,
                                 top: `calc(50% + ${y}px)`
                             }}
-                            onClick={() => setModalLLM(llm)}
+                            onClick={() => setSelectedLLM(llm)}
                         >
                             <div className="marker-dot"></div>
                             <div className="tooltiptext">
@@ -91,18 +91,15 @@ export default function RadialTaskSelector() {
                 })
             )}
 
-            {/* Modal */}
-            {modalLLM && (
-                <div className="modal-overlay" onClick={() => setModalLLM(null)}>
-                    <div className="modal-content" onClick={e => e.stopPropagation()}>
-                        <h3>{modalLLM.name}</h3>
-                        <ul style={{ listStyle: 'none', padding: 0 }}>
-                            {Object.entries(modalLLM.scores).map(([key, value]) => (
-                                <li key={key}><strong>{key}:</strong> {value}</li>
-                            ))}
-                        </ul>
-                        <button onClick={() => setModalLLM(null)} className="close-button">Close</button>
-                    </div>
+            {/* Side Panel */}
+            {selectedLLM && (
+                <div className="side-panel">
+                    <h3>{selectedLLM.name}</h3>
+                    <ul style={{ listStyle: 'none', padding: 0 }}>
+                        {Object.entries(selectedLLM.scores).map(([key, value]) => (
+                            <li key={key}><strong>{key}:</strong> {value}</li>
+                        ))}
+                    </ul>
                 </div>
             )}
         </div>
