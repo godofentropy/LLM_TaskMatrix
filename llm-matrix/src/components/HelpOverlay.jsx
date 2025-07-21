@@ -32,7 +32,7 @@ export default function HelpOverlay() {
                 <div style={{
                     position: 'fixed',
                     right: 0,
-                    top: 0,
+                    top: 1,
                     width: '300px',
                     height: '100vh',
                     background: '#1a1a1a',
