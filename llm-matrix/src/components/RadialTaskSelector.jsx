@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import llmsData from '../data/llms.json';
 import './RadialTaskSelector.css';
+import HelpOverlay from './HelpOverlay';
 
 const tasks = ["coding", "analyze data", "writing", "evolve idea"];
 
@@ -52,6 +53,7 @@ export default function RadialTaskSelector() {
 
     return (
         <div className="radial-container">
+            <HelpOverlay />
             {/* Concentric Rings */}
             <div className="dial-ring high-ring"></div>
             <div className="dial-ring medium-ring"></div>
