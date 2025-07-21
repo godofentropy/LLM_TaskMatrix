@@ -3,9 +3,9 @@ import llmsData from '../data/llms.json';
 import './RadialTaskSelector.css';
 import HelpOverlay from './HelpOverlay';
 
-const tasks = ["coding", "analyze data", "writing", "evolve idea"];
+export const tasks = ["coding", "analyze data", "writing", "evolve idea"];
 
-export default function RadialTaskSelector() {
+export default function RadialTaskSelector({ onTaskChange }) {
     const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
     const [filteredLLMs, setFilteredLLMs] = useState([]);
     const [selectedLLM, setSelectedLLM] = useState(null); // Side panel selection
@@ -24,7 +24,8 @@ export default function RadialTaskSelector() {
         });
 
         setFilteredLLMs(withSuitability);
-    }, [currentTask]);
+        if (onTaskChange) onTaskChange(currentTask);
+    }, [currentTask, onTaskChange]);
 
     const handleClick = () => {
         setCurrentTaskIndex((currentTaskIndex + 1) % tasks.length);

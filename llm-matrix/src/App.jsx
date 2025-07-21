@@ -1,8 +1,40 @@
-import RadialTaskSelector from './components/RadialTaskSelector';
+import { useState } from 'react';
+import RadialTaskSelector, { tasks } from './components/RadialTaskSelector';
 import HelpOverlay from './components/HelpOverlay';
 import './index.css';
 
 function App() {
+    const [currentTask, setCurrentTask] = useState(tasks[0]);
+
+    const resourcesByTask = {
+        coding: [
+            { icon: '💬', title: 'UIUC Chat Platform', subtitle: 'Explore UIUC-hosted LLMs', url: 'https://uiuc.chat' },
+            { icon: '⚙️', title: 'OpenAI API Docs', subtitle: 'Integrate GPT models via API', url: 'https://openai.com/api' },
+            { icon: '📚', title: 'HuggingFace Model Hub', subtitle: 'Find open-source coding models', url: 'https://huggingface.co/models' },
+        ],
+        'analyze data': [
+            { icon: '📊', title: 'Pandas Documentation', subtitle: 'Data analysis in Python', url: 'https://pandas.pydata.org/docs/' },
+            { icon: '📈', title: 'scikit-learn Guide', subtitle: 'Machine learning in Python', url: 'https://scikit-learn.org/stable/' },
+            { icon: '💬', title: 'UIUC Chat Platform', subtitle: 'Experiment with data-focused models', url: 'https://uiuc.chat' },
+        ],
+        writing: [
+            { icon: '✍️', title: 'Grammarly', subtitle: 'Improve your writing', url: 'https://www.grammarly.com/' },
+            { icon: '📖', title: 'Hemingway Editor', subtitle: 'Make your writing clear', url: 'https://hemingwayapp.com/' },
+            { icon: '💬', title: 'UIUC Chat Platform', subtitle: 'Use LLMs for writing assistance', url: 'https://uiuc.chat' },
+        ],
+        'evolve idea': [
+            { icon: '💡', title: 'MindMeister', subtitle: 'Mind mapping tool', url: 'https://www.mindmeister.com/' },
+            { icon: '📝', title: 'Design Thinking Guide', subtitle: 'Methods to develop ideas', url: 'https://designthinking.ideo.com/' },
+            { icon: '💬', title: 'UIUC Chat Platform', subtitle: 'Brainstorm with LLMs', url: 'https://uiuc.chat' },
+        ],
+    };
+
+    const handleTaskChange = task => {
+        setCurrentTask(task);
+    };
+
+    const resources = resourcesByTask[currentTask] || [];
+
     return (
         <>
             {/* HEADER */}
@@ -41,7 +73,7 @@ function App() {
             <div className="app">
 
                 {/* Radial Dial */}
-                <RadialTaskSelector />
+                <RadialTaskSelector onTaskChange={handleTaskChange} />
 
                 {/* RESOURCES SECTION */}
                 <div style={{
@@ -60,7 +92,7 @@ function App() {
                         color: '#000000ff',
                         textAlign: 'center'
                     }}>
-                        Learning Resources
+                        Learning Resources for {currentTask}
                     </h2>
                     <p style={{
                         marginBottom: '20px',
@@ -73,30 +105,7 @@ function App() {
                     </p>
 
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                        {[{
-                            icon: '💬',
-                            title: 'UIUC Chat Platform',
-                            subtitle: 'Explore UIUC-hosted LLMs',
-                            url: 'https://uiuc.chat'
-                        },
-                        {
-                            icon: '📚',
-                            title: 'HuggingFace Model Hub',
-                            subtitle: 'Find and compare open LLM models',
-                            url: 'https://huggingface.co/models'
-                        },
-                        {
-                            icon: '⚙️',
-                            title: 'OpenAI API Docs',
-                            subtitle: 'Integrate GPT models via API',
-                            url: 'https://openai.com/api'
-                        },
-                        {
-                            icon: '📄',
-                            title: 'Anthropic API Docs',
-                            subtitle: 'Integrate Claude models via API',
-                            url: 'https://platform.anthropic.com/docs'
-                        }].map(resource => (
+                                        {resources.map(resource => (
                             <div key={resource.title}
                                 style={{
                                     display: 'flex',
