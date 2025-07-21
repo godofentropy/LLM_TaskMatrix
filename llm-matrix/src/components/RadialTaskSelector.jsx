@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react';
 import llmsData from '../data/llms.json';
 import './RadialTaskSelector.css';
-import HelpOverlay from './HelpOverlay';
 
-const tasks = ["coding", "analyze data", "writing", "evolve idea"];
-
-export default function RadialTaskSelector() {
+export default function RadialTaskSelector({ onTaskChange }) {
+    const tasks = ["coding", "analyze data", "writing", "evolve idea"];
     const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
     const [filteredLLMs, setFilteredLLMs] = useState([]);
-    const [selectedLLM, setSelectedLLM] = useState(null); // Side panel selection
+    const [selectedLLM, setSelectedLLM] = useState(null);
 
     const currentTask = tasks[currentTaskIndex];
 
@@ -27,8 +25,10 @@ export default function RadialTaskSelector() {
     }, [currentTask]);
 
     const handleClick = () => {
-        setCurrentTaskIndex((currentTaskIndex + 1) % tasks.length);
-        setSelectedLLM(null); // Reset side panel when task changes
+        const nextIndex = (currentTaskIndex + 1) % tasks.length;
+        setCurrentTaskIndex(nextIndex);
+        onTaskChange(tasks[nextIndex]); // Notify App
+        setSelectedLLM(null);
     };
 
     const tiers = {
@@ -38,7 +38,6 @@ export default function RadialTaskSelector() {
     };
 
     const radiusMap = { high: 80, medium: 130, low: 180 };
-
     const arcMap = {
         high: { start: 300, end: 60 },
         medium: { start: 120, end: 240 },
@@ -53,8 +52,6 @@ export default function RadialTaskSelector() {
 
     return (
         <div className="radial-container">
-            <HelpOverlay />
-            {/* Concentric Rings */}
             <div className="dial-ring high-ring"></div>
             <div className="dial-ring medium-ring"></div>
             <div className="dial-ring low-ring"></div>
@@ -63,7 +60,6 @@ export default function RadialTaskSelector() {
                 {currentTask}
             </button>
 
-            {/* LLM Markers */}
             {Object.entries(tiers).map(([tier, llms]) =>
                 llms.map((llm, i) => {
                     const { start, end } = arcMap[tier];
@@ -93,7 +89,6 @@ export default function RadialTaskSelector() {
                 })
             )}
 
-            {/* Side Panel */}
             {selectedLLM && (
                 <div className="side-panel">
                     <h3>{selectedLLM.name}</h3>
