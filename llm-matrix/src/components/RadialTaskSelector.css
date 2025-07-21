@@ -1,50 +1,50 @@
-/* Dial Container */
 .radial-container {
     position: relative;
     width: 400px;
     height: 400px;
     margin: 40px auto;
-    background: #0f0f0f;
+    background: radial-gradient(circle, #13294B 0%, #0F1B2B 100%);
     border-radius: 50%;
-    box-shadow: 0 0 30px rgba(132, 63, 255, 0.3);
-    overflow: hidden;
+    box-shadow: 0 0 30px rgba(255, 85, 46, 0.3);
 }
 
-/* Concentric Rings */
 .dial-ring {
     position: absolute;
     border-radius: 50%;
-    border: 1px solid rgba(110, 168, 255, 0.2);
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    pointer-events: none;
+    border: 1px dashed rgba(255, 255, 255, 0.1);
 }
 
 .high-ring {
     width: 160px;
     height: 160px;
-    border: 2px solid rgba(110, 168, 255, 0.4);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .medium-ring {
     width: 260px;
     height: 260px;
-    border: 1px solid rgba(110, 168, 255, 0.3);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .low-ring {
     width: 340px;
     height: 340px;
-    border: 1px solid rgba(110, 168, 255, 0.2);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
-/* Center Button */
 .center-button {
     position: absolute;
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    background: #ff552e;
+    background: linear-gradient(135deg, #FF552E, #FF7745);
     border: none;
     color: white;
     font-size: 16px;
@@ -54,53 +54,48 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    transition: transform 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .center-button:hover {
     transform: translate(-50%, -50%) scale(1.05);
+    box-shadow: 0 0 25px rgba(255, 85, 46, 1);
 }
 
-/* Markers (Dots) */
 .llm-marker {
     position: absolute;
-    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.marker-dot {
+.llm-marker .marker-dot {
     width: 12px;
     height: 12px;
+    background: #6EA8FF;
     border-radius: 50%;
-    background: #6ea8ff;
-    box-shadow: 0 0 6px rgba(110,168,255,0.6);
-    transition: transform 0.2s;
+    box-shadow: 0 0 6px rgba(110, 168, 255, 0.6);
+    animation: softPulse 2s infinite;
 }
 
 .llm-marker:hover .marker-dot {
     transform: scale(1.3);
+    box-shadow: 0 0 12px rgba(110, 168, 255, 0.8);
 }
 
-/* Optional tier color coding */
-.llm-marker.high .marker-dot { background: #6ea8ff; }
-.llm-marker.medium .marker-dot { background: #4d88ff; }
-.llm-marker.low .marker-dot { background: #3a6cb0; }
-
-/* Tooltip */
 .tooltip .tooltiptext {
     visibility: hidden;
+    width: auto;
     background-color: #222;
     color: #fff;
     text-align: center;
-    border-radius: 6px;
     padding: 6px 10px;
+    border-radius: 8px;
     position: absolute;
     z-index: 1;
-    bottom: 140%; 
+    bottom: 125%;
     left: 50%;
     transform: translateX(-50%);
     opacity: 0;
     transition: opacity 0.3s;
-    white-space: nowrap;
     font-size: 12px;
 }
 
@@ -109,33 +104,29 @@
     opacity: 1;
 }
 
-/* Side Panel (Non-intrusive Scores Panel) */
 .side-panel {
     position: fixed;
     right: 0;
     top: 0;
-    width: 250px;
+    width: 300px;
     height: 100vh;
     background: #1a1a1a;
     color: #fff;
     padding: 20px;
     box-shadow: -4px 0 10px rgba(0,0,0,0.4);
-    overflow-y: auto;
     z-index: 9999;
+    transform: translateX(100%);
+    animation: slideIn 0.4s forwards;
 }
 
-.side-panel h3 {
-    margin-top: 0;
-    font-size: 20px;
-    color: #ff552e;
+@keyframes slideIn {
+    to {
+        transform: translateX(0);
+    }
 }
 
-.side-panel ul {
-    padding: 0;
-    margin-top: 10px;
-}
-
-.side-panel li {
-    margin-bottom: 6px;
-    font-size: 14px;
+@keyframes softPulse {
+    0% { box-shadow: 0 0 6px rgba(110, 168, 255, 0.6); }
+    50% { box-shadow: 0 0 12px rgba(110, 168, 255, 1); }
+    100% { box-shadow: 0 0 6px rgba(110, 168, 255, 0.6); }
 }
